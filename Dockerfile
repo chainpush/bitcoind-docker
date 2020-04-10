@@ -24,7 +24,7 @@ RUN gpg --import /laanwj-releases.asc
 
 RUN gpg --verify /SHA256SUMS.asc
 
-RUN sha256sum --check --ignore-missing SHA256SUMS.asc 2>&1 | grep OK
+RUN sha256sum --check --ignore-missing SHA256SUMS.asc
 
 FROM frolvlad/alpine-glibc
 
@@ -53,7 +53,5 @@ RUN adduser -D -u 1000 bitcoin bitcoin && \
     chown bitcoin:bitcoin -R /home/bitcoin
 
 USER bitcoin
-
-
 
 ENTRYPOINT ["/usr/local/bin/docker_entrypoint.sh"]
