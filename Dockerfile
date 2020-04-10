@@ -24,7 +24,7 @@ RUN gpg --import /laanwj-releases.asc
 
 RUN gpg --verify /SHA256SUMS.asc
 
-RUN sha256sum --check --ignore-missing SHA256SUMS.asc
+RUN sha256sum -c --ignore-missing SHA256SUMS.asc
 
 FROM frolvlad/alpine-glibc
 
