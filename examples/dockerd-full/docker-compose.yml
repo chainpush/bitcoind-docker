@@ -5,7 +5,7 @@ services:
     image: my_bitcoin:latest
     volumes:
       - "${BITCOIND_VOLUMES}:/home/bitcoin/.bitcoin"
-      - ./bitcoin.conf:/home/bitcoin/.bitcoin/bitcoin.conf
+      - ./bitcoin.conf:/home/bitcoin/.bitcoin/bitcoin.conf:ro
     ports:
       - "8332"    # mainnet rpc
       - "28333"   # zeromq
