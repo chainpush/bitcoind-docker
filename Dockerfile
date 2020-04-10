@@ -26,21 +26,23 @@ RUN gpg --verify /SHA256SUMS.asc
 
 RUN sha256sum -c SHA256SUMS.asc 2>&1 | grep "${BITCOIN_FILENAME}: OK"
 
+
+
 FROM frolvlad/alpine-glibc
 
 MAINTAINER "qyvlik <qyvlik@qq.com>"
+
+ARG BITCOIN_VERSION=0.19.1
+
+ENV BITCOIN_FILENAME bitcoin-${BITCOIN_VERSION}-x86_64-linux-gnu.tar.gz
 
 COPY --from=builder /${BITCOIN_FILENAME} /
 
 RUN apk update && \
     \
-    apk --no-cache add tar bash
-
-RUN echo "${BITCOIN_VERSION}"
-
-RUN echo "${BITCOIN_FILENAME}"
-
-RUN tar xzvf /${BITCOIN_FILENAME} && \
+    apk --no-cache add tar bash &&\
+    \
+    tar xzvf /${BITCOIN_FILENAME} && \
     \
     mv /bitcoin-${BITCOIN_VERSION}/bin/* /usr/local/bin/ && \
     \
