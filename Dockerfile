@@ -36,6 +36,8 @@ RUN apk update && \
     \
     apk --no-cache add tar bash
 
+RUN echo "${BITCOIN_VERSION}"
+
 RUN echo "${BITCOIN_FILENAME}"
 
 RUN tar xzvf /${BITCOIN_FILENAME} && \
