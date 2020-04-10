@@ -10,13 +10,15 @@ ENV LAANWJ_RELEASE_ASC https://bitcoin.org/laanwj-releases.asc
 
 RUN apk update && \
     \
-    apk --no-cache add wget tar ca-certificates gnupg bash && \
-    \
-    wget ${BITCOIN_DOWNLOAD_URL} && \
-    wget ${BITCOIN_FILENAME_SHA256SUMS} && \
-    wget ${LAANWJ_RELEASE_ASC} && \
-    \
-    cat /laanwj-releases.asc | gpg --with-fingerprint --with-colons - | sed -ne 's|^fpr:::::::::\([0-9A-F]\+\):$|\1|p' | grep '01EA5486DE18A882D4C2684590C8019E36C2E964' && \
+    apk --no-cache add wget tar ca-certificates gnupg
+
+RUN wget ${BITCOIN_DOWNLOAD_URL}
+
+RUN wget ${BITCOIN_FILENAME_SHA256SUMS}
+
+RUN wget ${LAANWJ_RELEASE_ASC}
+
+RUN cat /laanwj-releases.asc | gpg --with-fingerprint --with-colons - | sed -ne 's|^fpr:::::::::\([0-9A-F]\+\):$|\1|p' | grep '01EA5486DE18A882D4C2684590C8019E36C2E964' && \
     \
     gpg --import /laanwj-releases.asc && \
     \
