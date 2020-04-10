@@ -18,13 +18,13 @@ RUN wget ${BITCOIN_FILENAME_SHA256SUMS}
 
 RUN wget ${LAANWJ_RELEASE_ASC}
 
-RUN cat /laanwj-releases.asc | gpg --with-fingerprint --with-colons - | sed -ne 's|^fpr:::::::::\([0-9A-F]\+\):$|\1|p' | grep '01EA5486DE18A882D4C2684590C8019E36C2E964' && \
-    \
-    gpg --import /laanwj-releases.asc && \
-    \
-    gpg --verify /SHA256SUMS.asc && \
-    \
-    sha256sum --check --ignore-missing SHA256SUMS.asc 2>&1 | grep OK
+RUN cat /laanwj-releases.asc | gpg --with-fingerprint --with-colons - | sed -ne 's|^fpr:::::::::\([0-9A-F]\+\):$|\1|p' | grep '01EA5486DE18A882D4C2684590C8019E36C2E964'
+
+RUN gpg --import /laanwj-releases.asc
+
+RUN gpg --verify /SHA256SUMS.asc
+
+RUN sha256sum --check --ignore-missing SHA256SUMS.asc 2>&1 | grep OK
 
 FROM frolvlad/alpine-glibc
 
