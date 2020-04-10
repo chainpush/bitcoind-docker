@@ -27,7 +27,6 @@ RUN gpg --verify /SHA256SUMS.asc
 RUN sha256sum -c SHA256SUMS.asc 2>&1 | grep "${BITCOIN_FILENAME}: OK"
 
 
-
 FROM frolvlad/alpine-glibc
 
 MAINTAINER "qyvlik <qyvlik@qq.com>"
@@ -46,18 +45,22 @@ RUN apk update && \
     \
     mv /bitcoin-${BITCOIN_VERSION}/bin/* /usr/local/bin/ && \
     \
+    rm -rf /${BITCOIN_FILENAME} && \
+    \
     rm -rf /bitcoin-${BITCOIN_VERSION}/
 
 ADD ./docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
 
 RUN chmod a+x /usr/local/bin/docker_entrypoint.sh
 
-VOLUME /home/bitcoin/.bitcoin
-
 RUN adduser -D -u 1000 bitcoin bitcoin && \
     \
     chown bitcoin:bitcoin -R /home/bitcoin
 
 USER bitcoin
+
+VOLUME /home/bitcoin/.bitcoin
+
+WORKDIR /home/bitcoin
 
 ENTRYPOINT ["/usr/local/bin/docker_entrypoint.sh"]
