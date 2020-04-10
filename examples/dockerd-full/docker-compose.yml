@@ -2,8 +2,10 @@ version: '2'
 
 services:
   bitcoind:
-    image: qyvlik/bitcoind:latest
+    image: my_bitcoin:latest
     volumes:
-      - "${BITCOIND_VOLUMES}:/root/.bitcoin"
+      - "${BITCOIND_VOLUMES}:/home/bitcoin/.bitcoin"
+      - ./bitcoin.conf:/home/bitcoin/.bitcoin/bitcoin.conf
     ports:
-      - "${BITCOIND_MAINNET_RPCPORT}:8332"    # rpc mainnet
+      - "8332"    # mainnet rpc
+      - "28333"   # zeromq
