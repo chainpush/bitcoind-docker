@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  bitcoind:
+    image: qyvlik/bitcoind:latest
+    volumes:
+      - "${BITCOIND_VOLUMES}:/root/.bitcoin"
+    ports:
+      - "${BITCOIND_MAINNET_RPCPORT}:8332"    # rpc mainnet
