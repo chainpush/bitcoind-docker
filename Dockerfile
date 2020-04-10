@@ -24,7 +24,7 @@ RUN gpg --import /laanwj-releases.asc
 
 RUN gpg --verify /SHA256SUMS.asc
 
-RUN sha256sum -c SHA256SUMS.asc
+RUN sha256sum -c SHA256SUMS.asc 2>&1 | grep "${BITCOIN_FILENAME}: OK"
 
 FROM frolvlad/alpine-glibc
 
