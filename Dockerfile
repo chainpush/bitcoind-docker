@@ -35,8 +35,10 @@ COPY --from=builder /${BITCOIN_FILENAME} /
 RUN apk update && \
     \
     apk --no-cache add tar bash && \
-    \
-    tar xzvf /${BITCOIN_FILENAME} && \
+
+RUN echo "${BITCOIN_FILENAME}"
+
+RUN tar xzvf /${BITCOIN_FILENAME} && \
     \
     mv /bitcoin-${BITCOIN_VERSION}/bin/* /usr/local/bin/ && \
     \
