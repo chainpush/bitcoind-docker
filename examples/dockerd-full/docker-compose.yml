@@ -2,7 +2,7 @@ version: '2'
 
 services:
   bitcoind:
-    image: my_bitcoin:latest
+    image: qyvlik/bitcoind:latest
     volumes:
       - "${BITCOIND_VOLUMES}:/home/bitcoin/.bitcoin"
       - ./bitcoin.conf:/home/bitcoin/.bitcoin/bitcoin.conf:ro
