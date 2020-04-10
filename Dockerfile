@@ -34,7 +34,7 @@ COPY --from=builder /${BITCOIN_FILENAME} /
 
 RUN apk update && \
     \
-    apk --no-cache add tar bash && \
+    apk --no-cache add tar bash
 
 RUN echo "${BITCOIN_FILENAME}"
 
