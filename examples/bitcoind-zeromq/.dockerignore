@@ -1,0 +1,17 @@
+
+# node
+node_modules
+npm-debug.log
+snapshot-data
+
+# key
+ex-keys.json
+ex-key-list.json
+raw-ex-key-list.json
+
+# git
+.git
+.gitignore
+
+# env
+.env
