@@ -20,7 +20,7 @@
 
 ### startup by docker example
 
-- [dockerd-full](examples/dockerd-full)
+- [dockerd-full](examples/bitcoind-full)
 
 ### verify by gpg when docker build
 
